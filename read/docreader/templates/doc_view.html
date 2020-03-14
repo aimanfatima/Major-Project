@@ -20,6 +20,44 @@
         overflow-x: auto; 
         text-align:justify; 
     } 
+
+
+    .myDIV {
+        overflow-x: hidden; 
+        overflow-x: auto; 
+        position: fixed;
+        bottom: 70px;
+        right: 20px;
+        height: 600px;
+        width: 500px;
+        border-style: groove;
+        /* z-index: 800; */
+        background-color: white;
+    }
+
+    .chat-bot-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    height: 50px;
+    z-index: 999;
+    background-color:teal;
+    }   
+
+    .mainHead {
+        position: absolute;
+    }
+
+    .chat {
+        overflow-x: hidden; 
+        overflow-x: auto; 
+        position: absolute;
+    }
+
+    .send {
+        position: absolute;
+        bottom: 5px;
+    }
 </style> 
 
 </head>
@@ -28,7 +66,6 @@
     <div class="row">
     <div class="col-8">
         <div class=scroll>
-            <!-- <embed src="docreader/static/pdf_file.pdf" type="application/pdf" width="100%" height="600px" /> -->
             <h1>Document</h1>
             {% for para in full_text%}
             <p>
@@ -58,6 +95,63 @@
     </div>
     </div>
 </div>
+
+<button class="chat-bot-button" onclick="myFunction()">???</button>
+
+<div id="chatBox" class="myDIV" >
+    <div class="mainHead">
+        <div class="head">
+          <span>ChatBot</span>
+        </div>
+         </div> 
+        <div class="chat">
+          <div class="main">
+          </div>
+        </div>
+        <div class="send">
+          <textarea class="form-control txt1" rows="3"></textarea>
+          <input type="button" class="btn btn1" value="SEND" onclick="sender()">
+        </div>
+</div>
+<input type="hidden" id="questions" name="variable" value="{{ questions }}">
+
+<script>
+    function myFunction() {
+  var x = document.getElementById("chatBox");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+<script>
+
+        var questions = document.getElementById("questions").value;
+        console.log(questions)
+        var ques = {{ questions_json|safe }} ;
+    console.log(ques)
+    var messages = ques
+    var i=1;
+
+    $('body').ready(function() {
+    res(messages[3].fill_ups[1].question)
+    });
+
+    function sender() {
+        var msg = $('.txt1').val();
+        $('.main').append('<div class="txt-div" ><div class="txt msg">'+msg+'</div><div class="time">'+new Date().toLocaleTimeString()+'</div></div>');
+        $('.txt1').val('');
+        $('.chat').scrollTop = $('.chat').scrollHeight;
+        res(messages[3].fill_ups[1].question);
+        }
+
+        function res(msg) {
+        $('.main').append('<div class="txt-div2" ><div class="txt2 msg">'+msg+'</div><div class="time2">'+new Date().toLocaleTimeString()+'</div></div>');
+        }
+
+</script>
 
 </body>
 </html>

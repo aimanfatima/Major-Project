@@ -51,6 +51,7 @@ def doc_view(request):
             'doc_path' : doc_path,
             'pdf_path': pdf_path,
             'full_text': fullText,
-            'questions': questions
+            'questions': questions,
+            'questions_json': json.dumps(questions)
         }
         return render(request, 'doc_view.html', context=context, status=status.HTTP_201_CREATED)
