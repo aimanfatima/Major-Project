@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
 from docx import Document
-from .utils import doc_to_pdf_converter
+#from .utils import doc_to_pdf_converter
 import requests
 import json
 
